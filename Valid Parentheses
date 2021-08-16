@@ -1,0 +1,30 @@
+class Solution {
+    public boolean isValid(String s) {
+        Stack <Character> braces = new Stack<>(); 
+        int n = s.length();
+        char[] ch = s.toCharArray();
+        for(int i=0; i<n; i++){
+            if(ch[i] == '(' || ch[i] == '{' || ch[i] == '['){
+                braces.push(ch[i]);
+            }
+            else{
+                if(!braces.isEmpty()){
+                    char pop = braces.pop();
+                    if(ch[i] == ')' && (pop == '{' || pop == '[')){
+                        return false;
+                    }
+                    else if(ch[i] == '}' && (pop == '(' || pop == '[')){
+                        return false;
+                    }
+                    else if(ch[i] == ']' && (pop == '{' || pop == '(')){
+                        return false;
+                    }
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+        return braces.isEmpty();
+    }
+}
